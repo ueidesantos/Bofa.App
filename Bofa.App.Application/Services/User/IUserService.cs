@@ -6,6 +6,6 @@ namespace Bofa.App.Application.Services
     {
         Task<IEnumerable<User>> GetAll();
 
-        void AddUser(User user);
+        Task AddUser(User user);
     }
 }

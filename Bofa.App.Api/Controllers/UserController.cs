@@ -9,29 +9,24 @@ namespace Bofa.App.Api.Controllers
     public class UserController : Controller
     {
         private readonly IUserService _userService;
-        public UserController(IServiceProvider serviceProvider)
+        public UserController(IUserService userService)
         {
-            _userService = serviceProvider.GetService<IUserService>();
+            _userService = userService;
         }
 
         [HttpGet(Name = "GetAllUsers")]
-        public ActionResult<IAsyncEnumerable<User>> GetUsers()
+        public async Task<ActionResult<IAsyncEnumerable<User>>> GetUsers()
         {
-            var result = _userService.GetAll();
-
+            var result = await _userService.GetAll();
             return Ok(result);
-
-
         }
 
         [HttpPost(Name = "AddUser")]
-        public ActionResult<IAsyncEnumerable<User>> AddUser(User user)
+        public async Task<ActionResult<IAsyncEnumerable<User>>> AddUser(User user)
         {
-            _userService.AddUser(user);
+            await _userService.AddUser(user);
 
             return Created();
-
-
         }
     }
 }

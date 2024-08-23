@@ -23,7 +23,7 @@ namespace Bofa.App.Application.Services
                 throw;
             }
         }
-        public void AddUser(User user)
+        public async Task AddUser(User user)
         {
             var validator = new UserValidator();
             var resultValidation = validator.Validate(user);
